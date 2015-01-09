@@ -154,12 +154,12 @@ class Issue extends BaseCOntroller {
 		->leftJoin('cx_status', 'cx_status.id', '=', 'cx_issues.status_id')
 		->leftJoin('users as u', 'u.id', '=', 'cx_issues.assigned_to')
 		->leftJoin('users as a', 'a.id', '=', 'cx_issues.assigned_by')
-		->select('issue_id','parent_issue', 'tracking_num','issue_title', 'priority','priority_id','project','status', 'cx_issues.created_at AS postDate', 'a.username AS AssignedBy','u.username AS AssignedTo')		
+		->select('issue_id','parent_issue', 'tracking_num','issue_title', 'priority','priority_id','project','status', 'cx_issues.created_at AS postDate', 'a.username AS AssignedBy','u.username AS AssignedTo')
+		->orderBy('issue_id', 'ASC')
 		->get();
 		DB::setFetchMode(PDO::FETCH_CLASS);
 		//->paginate(15, array('issue_id', 'tracking_num','issue_title', 'priority','project','status', 'cx_issues.created_at') );
-		
-		
+			
 		
 		$pre = $this->prepareList( $issues );
 		$list =array();
@@ -298,6 +298,25 @@ class Issue extends BaseCOntroller {
 			
 		}
 	
+	}
+	
+	public function issues_posted_by_current_user()
+	{
+		DB::setFetchMode(PDO::FETCH_ASSOC);
+		$data['records'] = DB::table('cx_issues')
+		->leftJoin('cx_projects as pj', 'pj.id', '=', 'cx_issues.project_id')
+		->leftJoin('cx_priority as pr', 'pr.id', '=', 'cx_issues.priority_id')
+		->leftJoin('cx_status', 'cx_status.id', '=', 'cx_issues.status_id')
+		->leftJoin('users as u', 'u.id', '=', 'cx_issues.assigned_to')
+		->leftJoin('users as a', 'a.id', '=', 'cx_issues.assigned_by')
+		->where('assigned_by', '=', Auth::user()->id)
+		->where('status_id', '!=', 7)
+		->select('issue_id','parent_issue', 'tracking_num','issue_title', 'priority','priority_id','project','status', 'cx_issues.created_at AS postDate', 'a.username AS AssignedBy','u.username AS AssignedTo')
+		->get();
+		DB::setFetchMode(PDO::FETCH_CLASS);
+		//->paginate(15, array('issue_id', 'tracking_num','issue_title', 'priority','project','status', 'cx_issues.created_at') );
+		$data['page_title'] = "Issues Posted By Me - Unclosed List";
+		return View::make('issues.byme', $data);
 	}
 	
 	

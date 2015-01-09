@@ -34,12 +34,7 @@ class HomeController extends BaseController {
 		->get();
 		DB::setFetchMode(PDO::FETCH_CLASS);
 		//->paginate(15, array('issue_id', 'tracking_num','issue_title', 'priority','project','status', 'cx_issues.created_at') );
-	
-	
-		
-			
 		return $issues;
-		
 	
 	}
 	

@@ -21,52 +21,9 @@ font-size: 13px !important;
  @endif
 </div>
 
-<!-- Left Column -->
-<div class="col-md-4">
-
-	<div class="panel panel-default">
-	  <div class="panel-heading">Statistics</div>
-	  <div class="panel-body">
-	
-			<table class="table" style="font-size: 20px !important;">
-			<tr>
-				<td>Total Issues</td>
-				<td>{{ $total_issue }}</td>
-			</tr>
-			<tr>
-				<td>Unresolved Issues</td>
-				<td>{{ $unresolved }}</td>
-			</tr>
-			
-			<tr>
-				<td>Closed Issues</td>
-				<td>{{ $closed }}</td>
-			</tr>
-			
-			<tr>
-				<td>Issues Submitted By You</td>
-				<td>{{ $submitted_by_you }}</td>
-			</tr>
-			
-			<tr>
-				<td>Solved Issues By You</td>
-				<td>{{ $solved_by_you }}</td>
-			</tr>
-			<tr>
-				<td>Issues yet to be Solved By You</td>
-				<td>{{ $issues_yet_to_solve_by_you }}</td>
-			</tr>
-			</table>
-	
-	</div>
-	</div>
-</div>
-<!-- Right Column -->
-
- 
- <div class="col-md-8">
+ <div class="col-md-12">
 <div class="panel panel-default">
-	  <div class="panel-heading">Assigned To Me</div>
+	  <div class="panel-heading">Posted By Me</div>
 	  <div class="panel-body">
 <div class="list-content">
 @if(count($records) > 0)	

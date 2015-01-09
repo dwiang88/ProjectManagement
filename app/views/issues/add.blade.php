@@ -96,7 +96,7 @@ $(function() {
             $.ajax({
 
                 type: "POST",
-                url: "<?php echo URL::to('/') ?>/issue/list",
+                url: "<?php echo URL::to('/') ?>/issue/dropdown",
                 data: {
                     project_id: project_id
                 },

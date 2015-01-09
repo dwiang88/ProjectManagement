@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2015 at 01:20 AM
+-- Generation Time: Jan 09, 2015 at 01:50 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -143,14 +143,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` datetime NOT NULL,
   `remember_token` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `password_temp`, `user_type`, `code`, `active`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'srijon00@yahoo.com', 'srijon', '$2y$10$HHDVFRhtSXKlSD.pEDikfesrJSM9mM1OelkPBWnz7oEZP0kgmqL7O', '', 1, '', 1, '2014-01-18 11:27:47', '2015-01-08 15:24:28', 'BcydLm3pyLB7gb0OQoEpbAMTUEa8U8oozvYJVbKJtFfJFJ6gyA5EdCcaU6cG'),
+(1, 'srijon00@yahoo.com', 'srijon', '$2y$10$HHDVFRhtSXKlSD.pEDikfesrJSM9mM1OelkPBWnz7oEZP0kgmqL7O', '', 1, '', 1, '2014-01-18 11:27:47', '2015-01-09 12:49:41', 'SRRPRaU6rVFfGOHjTp9vNbYyMYkQToDiEjJw7HM0f4ZjjB2QXAE8amyKslMk'),
 (2, 'shomiie@live.com', 'shomi', '$2y$10$HHDVFRhtSXKlSD.pEDikfesrJSM9mM1OelkPBWnz7oEZP0kgmqL7O', '', 1, '', 1, '2014-01-18 12:02:37', '2014-01-18 15:42:06', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

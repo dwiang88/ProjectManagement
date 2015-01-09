@@ -66,8 +66,8 @@ function ()
 
 	// All Authenticated Group
 
-	Route::post('/issue/list', array(
-		'as' => 'issue_list-post',
+	Route::post('/issue/dropdown', array(
+		'as' => 'dropdown-issue_list-post',
 		'uses' => 'Issue@issue_list_for_dropdown'
 	));
 
@@ -79,19 +79,22 @@ function ()
 	));
 
 	// All Issues List GET
-
-	Route::get('/admin/issues', array(
+	Route::get('/issue/list', array(
 		'as' => 'All-issues',
 		'uses' => 'Issue@issues_get'
 	));
 
 	// Individual Issue GET
-
 	Route::get('issue/{id}', array(
 		'as' => 'Get-Issue',
 		'uses' => 'Issue@individual_issue_get'
 	))->where('id', '[0-9]+');
 	
+	// All Issues Posted By Current User GET
+	Route::get('/issue/me', array(
+	'as' => 'Individual-issues',
+	'uses' => 'Issue@issues_posted_by_current_user'
+	));
 	
 	// Edit Issue (GET)
 	Route::get('issue/edit/{id}', array(
