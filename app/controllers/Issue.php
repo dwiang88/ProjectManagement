@@ -29,13 +29,14 @@ class Issue extends BaseController {
 		));		
 		if ($validator->fails())
 		{
-			return Redirect::route('add-new-issue')->withErrors($validator)->withInput();
+			return Redirect::route('Add-new-issue')->withErrors($validator)->withInput();
 		}
 		else
 		{
 			//Generating Question Tracking Number
-			$time = substr( time() , -2);
-			$tracking_num = $time."-".rand();
+			$time = substr( time() , -4);
+			$rand = substr( rand() , -2);
+			$tracking_num = $time."-".$rand;
 		
 			DB::table('cx_issues')->insert(
 			array(	'issue_id' => '', 
@@ -167,12 +168,12 @@ class Issue extends BaseController {
 		
 		if(count($sorted_issues) > 0)
 		{
-			foreach ($sorted_issues as $key=>$value)
+			foreach ($issues as $rows)			
 			{
 				$count = 0;
-				foreach ($issues as $rows)
+				foreach ($sorted_issues as $key=>$value)
 				{
-					if($rows['issue_id'] == $key)
+					if($key == $rows['issue_id'])
 					{
 						$arranged_issues[$count]['serial'] = $count+1;
 						$arranged_issues[$count]['issue_id'] = $key;
@@ -185,9 +186,9 @@ class Issue extends BaseController {
 						$arranged_issues[$count]['AssignedBy'] = $rows['AssignedBy'];
 						$arranged_issues[$count]['tracking_num'] = $rows['tracking_num'];
 					}
-				$count++;	
+					$count++;
 				}
-			}
+			}			
 			
 			$data['records'] = $arranged_issues;
 		}

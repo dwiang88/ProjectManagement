@@ -22,6 +22,7 @@ font-size: 13px !important;
            <th>Track</th>
            <th>Title</th>
            <th>Status</th>
+           <th>Priority</th>
            <th>Assigned To</th>
            <th>Assigned By</th>
                   
@@ -36,7 +37,8 @@ font-size: 13px !important;
             <td width="50%;"><a href="{{ URL::to('/') }}/issue/{{ $rows['issue_id'] }}">{{ $rows['issue_title'] }}</a>
             	<p><span class="post-time">Post Date {{ date("d-m-Y",strtotime($rows['postDate'])) }}</span></p>
             	</td>
-            <td>{{ $rows['status'] }}</td>            
+            <td>{{ $rows['status'] }}</td>	
+            <td>{{ $rows['priority'] }}</td>            
             <td>{{ $rows['AssignedTo'] }}</td>  
             <td>{{ $rows['AssignedBy'] }}</td>
                   
