@@ -1,5 +1,5 @@
 <?php
-class Issue extends BaseCOntroller {
+class Issue extends BaseController {
 	
 	public function index()
 	{

@@ -1,11 +1,6 @@
 @import url("bootstrap.min.css");
-@import url("bootstrap.theme.min.css");
-
-
-@font-face {
-    font-family: Open Sans;
-    src: url(../fonts/opensans/OpenSans-Regular.ttf);
-}
+@import url("bootstrap-theme.min.css");
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 html , body {
 	
@@ -13,8 +8,8 @@ html , body {
 }
 
 body{
-	
-	font-family: 'Open Sans', sans-serif !important;	
+
+	font-family:'Open Sans', sans-serif!important;
 }
 
 * {
@@ -85,5 +80,4 @@ font-size:12.5px !important;
 .page_title {
 	color:#E62B1E;
 }
-
 
