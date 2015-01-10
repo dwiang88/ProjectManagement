@@ -23,8 +23,11 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Project Issues <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                        <li class="menu-item "><a href="{{ URL::route('Add-new-issue')}}">Create New Issue</a></li>
-                 	   <li class="menu-item "><a href="{{ URL::route('All-issues')}}">Issue List</a></li> 
-                 	   <li class="menu-item "><a href="{{ URL::route('Individual-issues')}}">Issue By Me</a></li>                
+                 	   <li class="menu-item "><a href="{{ URL::route('All-issues')}}">Issue List</a></li>
+                 	   <li class="menu-item "><a href="{{ URL::route('All-issues-glance')}}">Issues at a Glance</a></li> 
+                 	   <li class="menu-item "><a href="{{ URL::route('Individual-issues')}}">Issues Posted By Me</a></li>
+                 	   <li class="menu-item "><a href="{{ URL::route('In-progress-issues')}}">My In progress Issues</a></li>
+                 	                    
                   </ul>
                </li>
                <!-- End of Issues  -->

@@ -23,7 +23,7 @@ font-size: 13px !important;
 
  <div class="col-md-12">
 <div class="panel panel-default">
-	  <div class="panel-heading">Posted By Me</div>
+	  <div class="panel-heading">Issues</div>
 	  <div class="panel-body">
 <div class="list-content">
 @if(count($records) > 0)	

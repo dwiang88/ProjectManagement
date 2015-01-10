@@ -83,6 +83,12 @@ function ()
 		'as' => 'All-issues',
 		'uses' => 'Issue@issues_get'
 	));
+	
+	// All Issues At a glance (GET)
+	Route::get('/issue/list/glance', array(
+	'as' => 'All-issues-glance',
+	'uses' => 'Issue@issues_glance_get'
+	));
 
 	// Individual Issue GET
 	Route::get('issue/{id}', array(
@@ -94,6 +100,12 @@ function ()
 	Route::get('/issue/me', array(
 	'as' => 'Individual-issues',
 	'uses' => 'Issue@issues_posted_by_current_user'
+	));
+	
+	// In Progress Issues By current User (GET)
+	Route::get('/issue/in-progress', array(
+	'as' => 'In-progress-issues',
+	'uses' => 'Issue@in_progress_by_current_user'
 	));
 	
 	// Edit Issue (GET)

@@ -201,6 +201,53 @@ class Issue extends BaseController {
 	
 	}
 	
+	public function issues_glance_get()
+	{
+		DB::setFetchMode(PDO::FETCH_ASSOC);
+		$issues = DB::table('cx_issues')
+		->leftJoin('cx_projects as pj', 'pj.id', '=', 'cx_issues.project_id')
+		->leftJoin('cx_priority as pr', 'pr.id', '=', 'cx_issues.priority_id')
+		->leftJoin('cx_status', 'cx_status.id', '=', 'cx_issues.status_id')
+		->leftJoin('users as u', 'u.id', '=', 'cx_issues.assigned_to')
+		->leftJoin('users as a', 'a.id', '=', 'cx_issues.assigned_by')
+		->select('issue_id','parent_issue', 'issue_title', 'status_id')
+		->orderBy('issue_id', 'ASC')
+		->get();
+		DB::setFetchMode(PDO::FETCH_CLASS);
+		//->paginate(15, array('issue_id', 'tracking_num','issue_title', 'priority','project','status', 'cx_issues.created_at') );
+			
+		
+		$pre = $this->prepareList( $issues );
+		$list =array();
+		$sorted_issues = $this->break_array($pre,$counter = NULL, $list);
+		
+		if(count($sorted_issues) > 0)
+		{
+			foreach ($issues as $rows)
+			{
+				$count = 0;
+				foreach ($sorted_issues as $key=>$value)
+				{
+					if($key == $rows['issue_id'])
+					{				
+						$arranged_issues[$count]['issue_id'] = $key;
+						$arranged_issues[$count]['issue_title'] = $value;					
+						$arranged_issues[$count]['status_id'] = $rows['status_id'];			
+					}
+					$count++;
+				}
+			}
+				
+			$data['records'] = $arranged_issues;
+		}
+		else
+		{
+			$data['records'] = NULL;
+		}
+		$data['page_title'] = "All issues at a glance";
+		return View::make('issues.glance',$data);
+	}
+	
 	function prepareList(array $items, $pid = 0)
 	{
 		$output = array();
@@ -315,8 +362,26 @@ class Issue extends BaseController {
 		->select('issue_id','parent_issue', 'tracking_num','issue_title', 'priority','priority_id','project','status', 'cx_issues.created_at AS postDate', 'a.username AS AssignedBy','u.username AS AssignedTo')
 		->get();
 		DB::setFetchMode(PDO::FETCH_CLASS);
-		//->paginate(15, array('issue_id', 'tracking_num','issue_title', 'priority','project','status', 'cx_issues.created_at') );
+		
 		$data['page_title'] = "Issues Posted By Me - Unclosed List";
+		return View::make('issues.byme', $data);
+	}
+	
+	public function in_progress_by_current_user()
+	{
+		DB::setFetchMode(PDO::FETCH_ASSOC);
+		$data['records'] = DB::table('cx_issues')
+		->leftJoin('cx_projects as pj', 'pj.id', '=', 'cx_issues.project_id')
+		->leftJoin('cx_priority as pr', 'pr.id', '=', 'cx_issues.priority_id')
+		->leftJoin('cx_status', 'cx_status.id', '=', 'cx_issues.status_id')
+		->leftJoin('users as u', 'u.id', '=', 'cx_issues.assigned_to')
+		->leftJoin('users as a', 'a.id', '=', 'cx_issues.assigned_by')
+		->where('assigned_to', '=', Auth::user()->id)
+		->where('status_id', '=', 3) // 3 = In Progress
+		->select('issue_id','parent_issue', 'tracking_num','issue_title', 'priority','priority_id','project','status', 'cx_issues.created_at AS postDate', 'a.username AS AssignedBy','u.username AS AssignedTo')
+		->get();
+		DB::setFetchMode(PDO::FETCH_CLASS);
+		$data['page_title'] = "Issues In Progress";
 		return View::make('issues.byme', $data);
 	}
 	
